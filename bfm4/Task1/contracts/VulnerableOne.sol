@@ -45,13 +45,13 @@ contract VulnerableOne {
 		require(users_map[msg.sender].created != 0);
 		users_map[msg.sender].ether_balance += msg.value;
 	}
-
+// не выполняеться событие добавления пользователя
 	function add_new_user(address _new_user) public onlySuperUser {
 		require(users_map[_new_user].created == 0);
 		users_map[_new_user] = UserInfo({ created: now, ether_balance: 0 });
 		users_list.push(_new_user);
 	}
-	//кто угодно может удалять полльзователей, добавим проверку на 
+	//кто угодно может удалять полльзователей, добавим проверку на овнера
 	function remove_user(address _remove_user) public {
 		require(users_map[msg.sender].created != 0);
 		delete(users_map[_remove_user]);
@@ -67,7 +67,7 @@ contract VulnerableOne {
 			}
 		}
 	}
-
+	// возмона повторная транзакиця
 	function withdraw() public {
         msg.sender.transfer(users_map[msg.sender].ether_balance);
 		users_map[msg.sender].ether_balance = 0;
