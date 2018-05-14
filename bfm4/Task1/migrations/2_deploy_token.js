@@ -1,9 +1,9 @@
 'use strict';
 
 
-const BreadCoin = artifacts.require('BreadCoin.sol');
+const VulnerableOne = artifacts.require('bfm4_task1.sol');
 
 
 module.exports = function(deployer, network) {
-    deployer.deploy(BreadCoin);
+    deployer.deploy(VulnerableOne);
 };
