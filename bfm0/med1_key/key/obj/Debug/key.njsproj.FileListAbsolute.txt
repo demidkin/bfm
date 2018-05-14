@@ -1,0 +1,3 @@
+D:\Documents\YandexDisk\blookchain\Projects\bfm0\med1_key\key\obj\Debug\key.njsprojResolveAssemblyReference.cache
+D:\Documents\YandexDisk\blookchain\Projects\bfm0\med1_key\key\obj\Debug\key.njsproj.CoreCompileInputs.cache
+D:\Documents\YandexDisk\blookchain\Projects\bfm0\med1_key\key\bin\Microsoft.NodejsTools.WebRole.dll

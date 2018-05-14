@@ -1,0 +1,13 @@
+{
+  "name": "key",
+  "version": "0.0.0",
+  "description": "key",
+  "main": "app.js",
+  "author": {
+    "name": "Demidkin"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "node-rsa": "^0.4.2"
+  }
+}
