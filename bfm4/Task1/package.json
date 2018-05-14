@@ -1,8 +1,8 @@
 {
-  "name": "hello-smartz",
+  "name": "bfm4-task1",
   "version": "0.1.0",
   "scripts": {},
-  "author": "Eenae",
+  "author": "Demidkin",
   "license": "Apache-2.0",
   "devDependencies": {
     "babel-polyfill": "^6.23.0",
