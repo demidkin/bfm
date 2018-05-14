@@ -2,12 +2,8 @@
 
 import expectThrow from './helpers/expectThrow';
 
-<<<<<<< HEAD
 const VulnerableOne = artifacts.require('VulnerableOne.sol');
 
-=======
-const VulnerableOne = artifacts.require('bfm4_task1.sol');
->>>>>>> 5c58177393be5a97a72b6fb0ee6411919ecac5b2
 
 
 contract('VulnerableOne', function(accounts) {
@@ -49,10 +45,6 @@ contract('VulnerableOne', function(accounts) {
     //     await token.mint(accounts[0], 1000);
     //     const bal = await token.balanceOf(accounts[0]);
     //     console.log(bal);
-<<<<<<< HEAD
-    });
-=======
     // });
->>>>>>> 5c58177393be5a97a72b6fb0ee6411919ecac5b2
 
 });

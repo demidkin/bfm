@@ -9,11 +9,7 @@ contract Migrations {
         if (msg.sender == owner) _;
     }
 
-<<<<<<< HEAD
-    function Migrations() public {
-=======
     constructor() public {
->>>>>>> 5c58177393be5a97a72b6fb0ee6411919ecac5b2
         owner = msg.sender;
     }
 
