@@ -23,6 +23,7 @@ contract VulnerableOne {
 
     mapping (address => UserInfo) public users_map;
 	mapping (address => bool) is_super_user;
+	//ограничить лимит пользователей, для предотвращения атаки по лимиту газа
 	address[] users_list;
 
 	modifier onlySuperUser() {
@@ -36,11 +37,11 @@ contract VulnerableOne {
 		set_super_user(msg.sender);
 		add_new_user(msg.sender);
 	}
-
+//Любой пользователь может сделать супер пользователя, нужна проверка onlySuperUser
 	function set_super_user(address _new_super_user) public {
 		is_super_user[_new_super_user] = true;
 	}
-
+//вообще не понятно что это такое? msg.value
 	function pay() public payable {
 		require(users_map[msg.sender].created != 0);
 		users_map[msg.sender].ether_balance += msg.value;
@@ -50,10 +51,14 @@ contract VulnerableOne {
 		require(users_map[_new_user].created == 0);
 		users_map[_new_user] = UserInfo({ created: now, ether_balance: 0 });
 		users_list.push(_new_user);
+		emit UserAdded(msg.sender);
 	}
+	//атака по лимиту газа
 	//кто угодно может удалять полльзователей, добавим проверку на овнера
+	//может еще из суперпользователей удалять?
 	function remove_user(address _remove_user) public {
 		require(users_map[msg.sender].created != 0);
+		//поидеи просто сбросит к базовому значению
 		delete(users_map[_remove_user]);
 		bool shift = false;
 		for (uint i=0; i<users_list.length; i++) {
@@ -67,10 +72,27 @@ contract VulnerableOne {
 			}
 		}
 	}
-	// возмона повторная транзакиця
+	// для тестов, разбираюсь с масивами
+	function getArray() public returns (uint){
+		address[] sta;
+		sta.push(1);
+		sta.push(2);
+		sta.push(3);
+		sta.push(4);
+		sta.push(5);
+		sta.push(6);
+		sta.push(7);
+		sta.push(8);
+		sta.push(9);
+		//sta.push(10);
+		return sta.length;
+	}
+
+	//Reentrancy Attacks
 	function withdraw() public {
-        msg.sender.transfer(users_map[msg.sender].ether_balance);
+		uint256 balance = users_map[msg.sender].ether_balance;
 		users_map[msg.sender].ether_balance = 0;
+        msg.sender.transfer(balance);
 	}
 
 	function get_user_balance(address _user) public view returns(uint256) {

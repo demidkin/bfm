@@ -10,6 +10,9 @@ contract('VulnerableOne', function(accounts) {
 
     it('test constructor', async function() {
         const token1 = await VulnerableOne.new();
+        //await token1.pay();
+        const len = await token1.getArray();
+        console.log(len);
     });
     // it('test getCoinName', async function() {
     //     const token2 = await BreadCoin.new();
