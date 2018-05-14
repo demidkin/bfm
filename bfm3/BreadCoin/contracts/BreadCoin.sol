@@ -48,8 +48,8 @@ contract BreadCoin is ERC20, DetailedERC20 {
     }
 
 
-//MODEIER---------------------------------------------------------------------
 
+//CONSTRUCTOR------------------------------------------------------------------
     constructor() public DetailedERC20("BreadCoin", "BREAD", 18){
         TokenOwner = msg.sender;
         TotalSupply = 0;
@@ -58,7 +58,7 @@ contract BreadCoin is ERC20, DetailedERC20 {
     }
 
 
-//Function BreadCoin
+//BreadCoin Function
     function mint(address _to, uint256 _value) 
         public 
         inWhiteList(_to)
