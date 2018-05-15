@@ -31,16 +31,16 @@ contract VulnerableOne {
     }
 
     event UserAdded(address new_user);
-// Принудительно прописываем суперполльзователя в конструкторе
+//1. Принудительно прописываем суперполльзователя в конструкторе (set_super_user(msg.sender) не сработает так как у msg.sender еще нет на это прав)
     constructor() public {
 		is_super_user[msg.sender] = true; 
 		//set_super_user(msg.sender);
 		add_new_user(msg.sender);
 	}
 
-//1. Любой пользователь может сделать супер пользователя, добавим модификатор onlySuperUser
-//2. Наверно нужно добавить пользователя в список пользователей (users_list), если его еще там нет
-//3. ограничение списка пользователей до 255 (gaslimit)
+//2. Любой пользователь может сделать супер пользователя, добавим модификатор onlySuperUser
+//3. Наверно нужно добавить пользователя в список пользователей (users_list), если его еще там нет
+//4. Ограничение списка пользователей до 255 (gaslimit)
 	function set_super_user(address _new_super_user) 
 		public 
 		onlySuperUser()
@@ -50,14 +50,14 @@ contract VulnerableOne {
 		add_new_user(_new_super_user);
 	}
 
-//вообще не понял что это такое? msg.value, добавил проверку msg.value > 0
+//5. вообще не понял что это такое? msg.value, добавил проверку msg.value > 0
 	function pay() public payable {
 		require(users_map[msg.sender].created != 0);
 		if (msg.value > 0) users_map[msg.sender].ether_balance += msg.value;
 	}
 
-// 5. Не выполняеться событие добавления пользователя
-// 6. + ограничение списка пользователей до 255 (gaslimit)
+// 6. Не выполняеться событие добавления пользователя
+// 7. + ограничение списка пользователей до 255 (gaslimit)
 	function add_new_user(address _new_user) public onlySuperUser {
 		require(users_map[_new_user].created == 0);
 		require(users_list.length<256);
@@ -65,11 +65,11 @@ contract VulnerableOne {
 		users_list.push(_new_user);
 		emit UserAdded(_new_user);
 	}
-//Возможна атака по лимиту газа, ограничили список пользователей до 255.
-//7. кто угодно может удалять полльзователей, добавим модификатор onlySuperUser
-//8. может еще из суперпользователей удалять?
-//9. Нет проверки если удаляемый последний пользователь в массиве
-//10. Не изменяеться дилина масива
+//7. Возможна атака по лимиту газа, уже ограничили список пользователей до 255.
+//8. кто угодно может удалять полльзователей, добавим модификатор onlySuperUser
+//9. может еще из суперпользователей удалять сразу?
+//10. Нет проверки если удаляемый последний пользователь в массиве
+//11. Не изменяеться дилина масива
 	function remove_user(address _remove_user) public onlySuperUser {
 		require(users_map[msg.sender].created != 0);
 		delete(users_map[_remove_user]);
@@ -102,7 +102,7 @@ contract VulnerableOne {
 		}			
 	}
 
-	//11. Reentrancy Attacks
+	//12. Reentrancy Attacks
 	function withdraw() public {
 		uint256 balance = users_map[msg.sender].ether_balance;
 		users_map[msg.sender].ether_balance = 0;
