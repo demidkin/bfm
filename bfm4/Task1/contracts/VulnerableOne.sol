@@ -23,7 +23,6 @@ contract VulnerableOne {
 
     mapping (address => UserInfo) public users_map;
 	mapping (address => bool) is_super_user;
-	//ограничить лимит пользователей, для предотвращения атаки по лимиту газа
 	address[] users_list;
 
 	modifier onlySuperUser(){
@@ -51,7 +50,7 @@ contract VulnerableOne {
 		add_new_user(_new_super_user);
 	}
 
-//вообще не знаю что это такое? msg.value, добавил проверку msg.value > 0
+//вообще не понял что это такое? msg.value, добавил проверку msg.value > 0
 	function pay() public payable {
 		require(users_map[msg.sender].created != 0);
 		if (msg.value > 0) users_map[msg.sender].ether_balance += msg.value;
@@ -114,7 +113,9 @@ contract VulnerableOne {
 		return users_map[_user].ether_balance;
 	}
 
-//Функции для тестов
-
+	//Функции для тестов, проверка корректности удаления из users_list
+	function getUsers() public view returns (address[]){
+		return users_list;
+	}
 
 }
