@@ -1,10 +1,16 @@
 1. Проаудировать смарт-контракт. Найти максимальное число уязвимостей.
 
-* Папка ./Task1, контракт тут - https://github.com/demidkin/bfm/blob/master/bfm4/Task1/contracts/VulnerableOne.sol
+* Папка "Task1", контракт тут - https://github.com/demidkin/bfm/blob/master/bfm4/Task1/contracts/VulnerableOne.sol
+
+
 
 2. Работа с Web3. 
 Easy. Запросить баланс из контракта ERC20. Перевести токены из консоли chrome.
 Medium. Запись хеша в блокчейн эфириума с пользовательским интерфейсом в веб-браузере.
 Hard. Сделать dashboard ICO: Сколько собрано, сколько осталось и т.п.
+
+* Папка "web3"
+
+
 
 3. Сформулировать и описать идею полезного dApp-сервиса, который вы будете делать на след. неделе - выложить в группу для обсуждений. Для этого изучите примеры 10-20 других https://www.stateofthedapps.com/  и https://dappradar.com/ 
