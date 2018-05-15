@@ -26,22 +26,26 @@ contract VulnerableOne {
 	//ограничить лимит пользователей, для предотвращения атаки по лимиту газа
 	address[] users_list;
 
-	modifier onlySuperUser() {
+	modifier onlySuperUser(){
         require(is_super_user[msg.sender] == true);
         _;
     }
 
     event UserAdded(address new_user);
-
+// Принудительно прописываем суперполльзователя в конструкторе
     constructor() public {
-		set_super_user(msg.sender);
+		is_super_user[msg.sender] = true; 
+		//set_super_user(msg.sender);
 		add_new_user(msg.sender);
 	}
 
 //1. Любой пользователь может сделать супер пользователя, добавим модификатор onlySuperUser
 //2. Наверно нужно добавить пользователя в список пользователей (users_list), если его еще там нет
 //3. ограничение списка пользователей до 255 (gaslimit)
-	function set_super_user(address _new_super_user) public onlySuperUser() {
+	function set_super_user(address _new_super_user) 
+		public 
+		onlySuperUser()
+	{
 		require(users_list.length<256);
 		is_super_user[_new_super_user] = true;
 		add_new_user(_new_super_user);
@@ -53,9 +57,9 @@ contract VulnerableOne {
 		if (msg.value > 0) users_map[msg.sender].ether_balance += msg.value;
 	}
 
-//5. Не выполняеться событие добавления пользователя
-//6. + ограничение списка пользователей до 255 (gaslimit)
-	function add_new_user(address _new_user) public onlySuperUser() {
+// 5. Не выполняеться событие добавления пользователя
+// 6. + ограничение списка пользователей до 255 (gaslimit)
+	function add_new_user(address _new_user) public onlySuperUser {
 		require(users_map[_new_user].created == 0);
 		require(users_list.length<256);
 		users_map[_new_user] = UserInfo({ created: now, ether_balance: 0 });
@@ -67,7 +71,7 @@ contract VulnerableOne {
 //8. может еще из суперпользователей удалять?
 //9. Нет проверки если удаляемый последний пользователь в массиве
 //10. Не изменяеться дилина масива
-	function remove_user(address _remove_user) public onlySuperUser() {
+	function remove_user(address _remove_user) public onlySuperUser {
 		require(users_map[msg.sender].created != 0);
 		delete(users_map[_remove_user]);
 		delete(is_super_user[_remove_user]);
@@ -78,15 +82,19 @@ contract VulnerableOne {
 		else 
 		{
 			bool shift = false;
-			for (uint i=0; i<users_list.length-1; i++) {
-				if (!shift && users_list[i] == _remove_user){
+			for (uint i=0; i<users_list.length-1; i++) 
+			{
+				if (!shift && users_list[i] == _remove_user)
+				{
 					shift = true;
 				}
 			
-				if (shift == true) {
+				if (shift == true) 
+				{
 					users_list[i] = users_list[i+1];
 				}
 			}
+
 			if (shift == true)
 			{
 				delete users_list[users_list.length-1];
@@ -105,5 +113,8 @@ contract VulnerableOne {
 	function get_user_balance(address _user) public view returns(uint256) {
 		return users_map[_user].ether_balance;
 	}
+
+//Функции для тестов
+
 
 }
