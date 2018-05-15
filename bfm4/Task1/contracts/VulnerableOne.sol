@@ -1,6 +1,7 @@
 pragma solidity 0.4.23;
 
-import "zeppelin-solidity/contracts/math/SafeMath.sol";
+//не используеться
+//import "zeppelin-solidity/contracts/math/SafeMath.sol";
 
 /*
 TZ: contract creator becomes the first superuser. Then he adds new users and superusers. Every superuser can add new users and superusers;
@@ -14,7 +15,8 @@ If user sends ether, his balance is increased. Then he can withdraw eteher from 
 
 
 contract VulnerableOne {
-    using SafeMath for uint;
+	//не используеться
+   	//using SafeMath for uint;
 
     struct UserInfo {
         uint256 created;
