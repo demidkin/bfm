@@ -2,47 +2,43 @@
 <html>
 
 <head>
-<script type="text/javascript">
-   
-    var Web3 = require('web3');
-    var web3 = new Web3();
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="https://rockmining.blob.core.windows.net/logo/favicon.png">
+    <script type="text/javascript" src="../js/rock2.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-
-    if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
-    } else {
-        web3 = new Web3(new web3.providers.HttpProvider("http://localhost:8545"));
-    }
-    function watchBalance() {
-
-        var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"value","type":"uint256"}],"name":"setBonus","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenHolder","type":"address"}],"name":"approvedDividendsOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"transferAllDividends","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenHolder","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"rate","type":"uint256"}],"name":"setCurrentExchangeRate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"totalDividendsAmount","type":"uint256"}],"name":"approveDividends","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"burnUnsold","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"},{"name":"amount","type":"uint256"}],"name":"send","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Burned","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"DividendsTransfered","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"}]
-        var contractAddress = '0xC16b542ff490e01fcc0DC58a60e1EFdc3e357cA6';
-        var contract = web3.eth.contract(abi).at(contractAddress);
-        var totalSupply = contract.totalSupply(function(err, res){
-            document.getElementById('original').innerText = ' original balance: ' + res + '    watching...';
-            //console.log(res)
-        });
-        console.log(contract);
-
-        // var coinbase = web3.eth.coinbase;
-        // var originalBalance = web3.eth.getBalance(coinbase).toNumber();
-        // document.getElementById('coinbase').innerText = 'coinbase: ' + coinbase;
-        // document.getElementById('original').innerText = ' original balance: ' + originalBalance + '    watching...';
-        // web3.eth.filter('latest').watch(function() {
-        //     var currentBalance = web3.eth.getBalance(coinbase).toNumber();
-        //     document.getElementById("current").innerText = 'current: ' + currentBalance;
-        //     document.getElementById("diff").innerText = 'diff:    ' + (currentBalance - originalBalance);
-        // });
-    }
-</script>
 </head>
 <body>
-    <h1>coinbase balance</h1>
-    <button type="button" onClick="watchBalance();">watch balance</button>
-    <div></div>
-    <div id="coinbase"></div>
-    <div id="original"></div>
-    <div id="current"></div>
-    <div id="diff"></div>
+    <div class="container">
+        <div class="alert alert-danger" role="alert">
+            <h1 align="center">ICE ROCK MINING (ROCK2)</h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm">
+                <!--Static-->
+                    <div class="alert alert-primary" role="alert" id="Contract"><a href="https://etherscan.io/token/0xC16b542ff490e01fcc0DC58a60e1EFdc3e357cA6">Contract: 0xC16b542ff490e01fcc0DC58a60e1EFdc3e357cA6</a></div>
+                    <div class="alert alert-primary" role="alert" id="Creator"><a href="https://etherscan.io/address/0xb16dc534252e1bbc5a5190e7225615360d1e27eb">Creator: 0xB16Dc534252E1bBc5a5190e7225615360D1E27eB</a></div>
+                    <div class="alert alert-primary" role="alert" id="Holders">Holders: 6489</div>
+                    <div class="alert alert-primary" role="alert" id="Transactions">Transactions: 12,739</div>
+            </div>
+            <div class="col-sm">
+                <!--WEB3-->
+                    <div class="alert alert-primary" role="alert" id="name">Name:</div>
+                    <div class="alert alert-primary" role="alert" id="symbol">Symbol:</div>
+                    <div class="alert alert-primary" role="alert" id="balanceOf">Balance</div>
+                    <div class="alert alert-primary" role="alert" id="totalSuplay">Total Supply</div>
+                    <button type="button" class="btn btn-dark" onClick="watchBalance();">Update from web3</button>    
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </body>
 </html>
