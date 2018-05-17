@@ -55,7 +55,7 @@ contract VulnerableOne {
 //5. ошибка переполнения
 	function pay() public payable {
 		require(users_map[msg.sender].created != 0);
-		if ((users_map[msg.sender].ether_balance + msg.value) > msg.value) users_map[msg.sender].ether_balance += msg.value;
+		if ((users_map[msg.sender].ether_balance + msg.value) > users_map[msg.sender].ether_balance) users_map[msg.sender].ether_balance += msg.value;
 	}
 
 // 6. Не выполняеться событие добавления пользователя
