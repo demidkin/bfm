@@ -5,7 +5,7 @@ Task 1. Проаудировать смарт-контракт.
     
     https://github.com/demidkin/bfm/blob/master/bfm4/Task1/contracts/VulnerableOne.sol
 
-
+Переписал контракт, написал тесты
 
 Task 2. Работа с Web3.
 ======================
