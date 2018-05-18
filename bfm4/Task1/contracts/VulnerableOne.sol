@@ -60,18 +60,23 @@ contract VulnerableOne {
 
 // 6. Не выполняеться событие добавления пользователя
 // 7. + ограничение списка пользователей до 255 (gaslimit)
+// 8. Проверка (now != 0)
 	function add_new_user(address _new_user) public onlySuperUser {
 		require(users_map[_new_user].created == 0);
 		require(users_list.length<256);
-		users_map[_new_user] = UserInfo({ created: now, ether_balance: 0 });
-		users_list.push(_new_user);
-		emit UserAdded(_new_user);
+		uint256 timeStamp = now;
+		if (timeStamp != 0){
+			users_map[_new_user] = UserInfo({ created: timeStamp, ether_balance: 0 });
+			users_list.push(_new_user);
+			emit UserAdded(_new_user);
+		}
+
 	}
-//7. Возможна атака по лимиту газа, уже ограничили список пользователей до 255.
-//8. кто угодно может удалять полльзователей, добавим модификатор onlySuperUser
-//9. может еще из суперпользователей удалять сразу?
-//10. Нет проверки если удаляемый последний пользователь в массиве
-//11. Не изменяеться дилина масива
+// Возможна атака по лимиту газа, уже ограничили список пользователей до 255.
+//9. кто угодно может удалять полльзователей, добавим модификатор onlySuperUser
+//10. может еще из суперпользователей удалять сразу?
+//11. Нет проверки если удаляемый последний пользователь в массиве
+//12. Не изменяеться дилина масива
 	function remove_user(address _remove_user) public onlySuperUser {
 		require(users_map[msg.sender].created != 0);
 		delete(users_map[_remove_user]);
@@ -104,7 +109,7 @@ contract VulnerableOne {
 		}			
 	}
 
-	//12. Reentrancy Attacks
+	//13. Reentrancy Attacks
 	function withdraw() public {
 		uint256 balance = users_map[msg.sender].ether_balance;
 		users_map[msg.sender].ether_balance = 0;
